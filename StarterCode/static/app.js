@@ -16,7 +16,7 @@ function readJson(){
 var layout = {
     title: "Top 10 OTUs",
     xaxis: {
-        title: "Number of OTUs"
+        title: "Microbial population"
     },
     yaxis: {
         title: "OTU id"
@@ -52,13 +52,14 @@ var trace1 = {
 
 // 4. Display the sample metadata, i.e., an individual's demographic information
 // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-d3.select("#sample-metadata")
 
 function unpack(rows, index){
     return rows.map(function(row){
         return row[index];
     });
 }
+
+d3.select("#sample-metadata").append(row[index]);
 
 // 6. Update all of the plots any time that a new sample is selected.
 d3.select("#selDataset").on("change", updateChanges);

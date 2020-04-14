@@ -2,3 +2,7 @@ body {
     background-color: Tan;
     border: 6px solid Sienna;
 }
+
+.jumbotron {
+    border: 6px solid Brown;
+}
