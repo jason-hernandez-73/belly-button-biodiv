@@ -35,7 +35,16 @@ function createChart(sample) {
 
         var layout = {
         title: 'Total numbers, by OTU',
-        showlegend: false,
+        xaxis: {
+            title: {
+              text: 'OTU id',
+            },
+          },
+        yaxis: {
+            title: {
+                text: 'Microbial population',
+            },
+        },
         height: 600,
         width: 1200
         };
