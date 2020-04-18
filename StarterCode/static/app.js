@@ -5,9 +5,9 @@ function readJson(){
         var select = d3.select("#selDataset");
         names.forEach(function (data) {
             select.append("option").text(data).property("value", data);
-        })
+        });
         createChart(names[0]);
-    })
+    });
 };
 
 readJson();
@@ -22,42 +22,43 @@ function createChart(sample) {
 
         // 3. Create a bubble chart that displays each sample.
         var trace1 = {
-        x: otu_ids,
-        y: sample_values,
-        mode: 'markers',
-        marker: {
-            size: sample_values,
-            color: otu_ids
-        }
-        };
+            x: otu_ids,
+            y: sample_values,
+            mode: 'markers',
+            marker: {
+                size: sample_values,
+                color: otu_ids
+                }
+            };
 
         var data = [trace1];
 
         var layout = {
-        title: 'Total numbers, by OTU',
-        xaxis: {
-            title: {
-              text: 'OTU id',
-            },
-          },
-        yaxis: {
-            title: {
-                text: 'Microbial population',
-            },
-        },
-        height: 600,
-        width: 1200
-        };
+            title: 'Total numbers, by OTU',
+            xaxis: {
+                title: {
+                    text: 'OTU id'
+                    }
+                },
+            yaxis: {
+                title: {
+                    text: 'Microbial population'
+                    }
+                },
+            height: 600,
+            width: 1200
+            };
 
         Plotly.newPlot('bubble', data, layout);
 
         // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
-        var trace2 = [{
-            x: sample_values.slice(0, 10).reverse(),
-            y: otu_ids.slice(0, 10).map(otu_ids => `OTU ${otu_ids}`).reverse(),
-            text: otu_labels.slice(0, 10).reverse(),
-            type: "bar",
-            orientation: "h"
+        var trace2 = [
+            {
+                x: sample_values.slice(0, 10).reverse(),
+                y: otu_ids.slice(0, 10).map(otu_ids => `OTU ${otu_ids}`). reverse(),
+                text: otu_labels.slice(0, 10).reverse(),
+                type: "bar",
+                orientation: "h"
             }];
 
         var layout = {
@@ -69,24 +70,25 @@ function createChart(sample) {
                 title: "OTU id"
             }
         };
-        
         Plotly.newPlot("bar", trace2, layout);
-    })
-    
-    // 4. Display the sample metadata, i.e., an individual's demographic information
-    // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-    var result = data.metadata.filter(obj => obj.id == sample)[0];
-    var demographic = d3.select("#sample-metadata").append("ul");
-    var lrow;
-    for (var i = 0; i < 7; i++) {
-        lrow = demographic.append("li");
-        var key = metadata.key.text;
-        var value = metadata.value.text;
-        lrow.append(`${key}: ${value}`);
 
-}
+        // 4. Display the sample metadata, i.e., an individual's demographic information
+        // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+        var result = data.metadata.filter(obj => obj.id == sample)[0];
+        var demographic = d3.select("#sample-metadata").append("ul");
+        var lrow=[];
+        for (var i = 0; i < 7; i++) {
+            lrow = demographic.append("li");
+            var key = metadata.key.text;
+            var value = metadata.value.text;
+            lrow.append(`${key}: ${value}`);
+        };
+    });
+    
+    
+};
 
 // 6. Update all of the plots any time that a new sample is selected.
 function optionChanged(newSample) {
     createChart(newSample);
-}
+};
