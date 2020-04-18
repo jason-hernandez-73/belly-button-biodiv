@@ -1,6 +1,6 @@
 // 1. Use the D3 library to read in samples.json.
 function readJson(){
-    d3.json("../data/samples.json").then(function(data) {
+    d3.json("../samples.json").then(function(data) {
         var names = data.names;
         var select = d3.select("#selDataset");
         names.forEach(function (data) {
@@ -14,7 +14,7 @@ readJson();
 
 // Function to create charts
 function createChart(sample) {
-    d3.json("../data/samples.json").then(function(data) {
+    d3.json("../samples.json").then(function(data) {
         var result = data.samples.filter(obj => obj.id == sample)[0];
         var otu_ids = result.otu_ids;
         var otu_labels = result.otu_labels;
@@ -72,19 +72,19 @@ function createChart(sample) {
         
         Plotly.newPlot("bar", trace2, layout);
     })
-        
+    
+    // 4. Display the sample metadata, i.e., an individual's demographic information
+    // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+    var result = data.metadata.filter(obj => obj.id == sample)[0];
+    var demographic = d3.select("#sample-metadata").append("ul");
+    var lrow;
+    for (var i = 0; i < 7; i++) {
+        lrow = demographic.append("li");
+        var key = metadata.key.text;
+        var value = metadata.value.text;
+        lrow.append(`${key}: ${value}`);
+
 }
-
-// // 4. Display the sample metadata, i.e., an individual's demographic information
-// // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-
-// function unpack(rows, index){
-//     return rows.map(function(row){
-//         return row[index];
-//     });
-// }
-
-// d3.select("#sample-metadata").append(row[index]);
 
 // 6. Update all of the plots any time that a new sample is selected.
 function optionChanged(newSample) {
