@@ -1,6 +1,6 @@
 // 1. Use the D3 library to read in samples.json.
 function readJson(){
-    d3.json("../samples.json").then(function(data) {
+    d3.json("../data/samples.json").then(function(data) {
         var names = data.names;
         var select = d3.select("#selDataset");
         names.forEach(function (data) {
@@ -14,7 +14,7 @@ readJson();
 
 // Function to create charts
 function createChart(sample) {
-    d3.json("../samples.json").then(function(data) {
+    d3.json("../data/samples.json").then(function(data) {
         var result = data.samples.filter(obj => obj.id == sample)[0];
         var otu_ids = result.otu_ids;
         var otu_labels = result.otu_labels;
@@ -83,9 +83,7 @@ function createChart(sample) {
             var value = metadata.value.text;
             lrow.append(`${key}: ${value}`);
         };
-    });
-    
-    
+    }); 
 };
 
 // 6. Update all of the plots any time that a new sample is selected.
