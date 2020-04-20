@@ -39,7 +39,7 @@ function createChart(sample) {
                         { range: [5, 6], color: "#ffad33" },
                         { range: [6, 7], color: "#ffc266" },
                         { range: [7, 8], color: "#ffd699" },
-                        { range: [8, 9], color: "#ffebcc" },
+                        { range: [8, 9], color: "#ffebcc" }
                     ],
                 }
             }
