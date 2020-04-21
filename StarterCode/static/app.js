@@ -75,15 +75,11 @@ function createChart(sample) {
         // 4. Display the sample metadata, i.e., an individual's demographic information
         // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
         var result2 = chart_data.metadata.filter(obj => obj.id == sample)[0];
-        var demographic = d3.select("#sample-metadata").append("ul");
-        var lrow=[];
-
-        // Object.entries({ result2 }).forEach(([key, value]) => {
-        //     lrow = demographic.append("li"),
-        //     var key = result2.key,
-        //     var value = result2.value,
-        //     lrow.append(`${key}: ${value}`)
-        // });
+        var demographic = d3.select("#sample-metadata");
+        
+        Object.entries(result2).forEach(([key, value]) => {
+            demographic.append('h6').text(`${key}: ${value}`);
+        });
     }); 
 };
 
