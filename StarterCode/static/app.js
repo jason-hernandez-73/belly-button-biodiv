@@ -76,10 +76,11 @@ function createChart(sample) {
         // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
         var result2 = chart_data.metadata.filter(obj => obj.id == sample)[0];
         var demographic = d3.select("#sample-metadata");
-        
+        demographic.html("")
         Object.entries(result2).forEach(([key, value]) => {
             demographic.append('h6').text(`${key}: ${value}`);
         });
+        createGauge(sample);
     }); 
 };
 
